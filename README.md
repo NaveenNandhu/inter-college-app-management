@@ -94,13 +94,18 @@ This project solves these problems using a digital event management platform wit
 
 
 ## Step 2
-Admin adds multiple events under the meet.
+<img width="1919" height="910" alt="image" src="https://github.com/user-attachments/assets/c1331c3e-75a0-426b-9465-6e7ba98b8e4b" />
+
 
 ## Step 3
-Students register and log in.
+<img width="1919" height="908" alt="image" src="https://github.com/user-attachments/assets/96494b20-dac8-4b6f-9cd2-8f333999da9a" />
+<img width="1919" height="908" alt="image" src="https://github.com/user-attachments/assets/e5612d02-94fc-43c8-9c57-4224d3cce9ab" />
+
+
 
 ## Step 4
-Students browse events and register.
+<img width="1919" height="905" alt="image" src="https://github.com/user-attachments/assets/4b1d6378-0757-400c-8d3f-013cae7d0356" />
+
 
 ## Step 5
 QR codes are generated automatically.
