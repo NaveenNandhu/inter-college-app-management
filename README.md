@@ -90,7 +90,8 @@ This project solves these problems using a digital event management platform wit
 # ⚙️ System Workflow
 
 ## Step 1
-Admin creates an inter-college meet.
+<img width="1919" height="912" alt="image" src="https://github.com/user-attachments/assets/9da68527-727b-4e60-b00d-833453f7df1a" />
+
 
 ## Step 2
 Admin adds multiple events under the meet.
