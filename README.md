@@ -181,7 +181,7 @@ Passionate about building real-world applications using modern web technologies.
 # 📬 Contact
 
 GitHub:  
-[:contentReference[oaicite:0]{index=0}](https://github.com/NaveenNandhu)
+[NaveenNandhu](https://github.com/NaveenNandhu)
 
 ---
 
