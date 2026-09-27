@@ -108,7 +108,8 @@ This project solves these problems using a digital event management platform wit
 
 
 ## Step 5
-QR codes are generated automatically.
+<img width="1919" height="909" alt="image" src="https://github.com/user-attachments/assets/b256ddc9-2be8-428d-bd29-fe6132ba02d5" />
+
 
 ## Step 6
 On event day:
@@ -117,7 +118,8 @@ On event day:
 - Lunch token verified
 
 ## Step 7
-Results and certificates are published digitally.
+<img width="1919" height="908" alt="image" src="https://github.com/user-attachments/assets/71229c98-3274-46ed-863a-6e0f17977fbe" />
+
 
 ---
 
@@ -179,7 +181,7 @@ Passionate about building real-world applications using modern web technologies.
 # 📬 Contact
 
 GitHub:  
-:contentReference[oaicite:0]{index=0}
+[:contentReference[oaicite:0]{index=0}](https://github.com/NaveenNandhu)
 
 ---
 
