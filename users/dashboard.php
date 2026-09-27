@@ -11,17 +11,39 @@ if(!isset($_SESSION["user_loggedin"]) || $_SESSION["user_loggedin"] !== true){
 // Hide deprecated warnings from the QR code library
 error_reporting(E_ALL & ~E_DEPRECATED);
 
-// Include the QR Code library.
+// Include the QR Code library if available.
 $qrlib_path = '../lib/php-qrcode/qrlib.php';
-if (!file_exists($qrlib_path)) {
-    die("Error: QR Code library not found. Please follow installation instructions.");
+if (file_exists($qrlib_path)) {
+    require_once $qrlib_path;
 }
-require_once $qrlib_path;
+
+// Helper function to safely get or generate QR code URL (supports Vercel without PHP GD extension)
+if (!function_exists('get_qr_code_url')) {
+    function get_qr_code_url($data, $file_path = '') {
+        if (function_exists('imagecreate') && class_exists('QRcode') && !empty($file_path)) {
+            try {
+                $dir = dirname($file_path);
+                if (!file_exists($dir)) {
+                    @mkdir($dir, 0777, true);
+                }
+                if (file_exists($dir) && is_writable($dir)) {
+                    @QRcode::png($data, $file_path, QR_ECLEVEL_L, 4);
+                    if (file_exists($file_path)) {
+                        return $file_path . '?t=' . time();
+                    }
+                }
+            } catch (\Throwable $e) {
+                // Fallback to API if generation fails
+            }
+        }
+        return "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urlencode($data);
+    }
+}
 
 // Prepare the directory for storing generated QR codes
 $qr_temp_dir = 'qrcodes/';
-if (!file_exists($qr_temp_dir)) {
-    mkdir($qr_temp_dir, 0777, true);
+if (function_exists('imagecreate') && !file_exists($qr_temp_dir)) {
+    @mkdir($qr_temp_dir, 0777, true);
 }
 
 // Use the new session variable for the user's ID
@@ -47,14 +69,14 @@ if($stmt = $conn->prepare($sql)){
 
 // --- Generate Lunch Token QR if applicable ---
 $has_registrations = count($registrations) > 0;
-$lunch_qr_file = '';
+$lunch_qr_src = '';
 if ($has_registrations) {
     // Use the new session variable for the user's name
     $lunch_qr_data = "LUNCH_TOKEN;SID=" . $user_id . ";NAME=" . rawurlencode($_SESSION['user_name']);
     $lunch_qr_filename = 'lunch_sid_' . $user_id . '.png';
-    $lunch_qr_file = $qr_temp_dir . $lunch_qr_filename;
+    $lunch_qr_file_path = $qr_temp_dir . $lunch_qr_filename;
     
-    QRcode::png($lunch_qr_data, $lunch_qr_file, QR_ECLEVEL_L, 5);
+    $lunch_qr_src = get_qr_code_url($lunch_qr_data, $lunch_qr_file_path);
 }
 ?>
 <!DOCTYPE html>
@@ -199,7 +221,7 @@ if ($has_registrations) {
             <h2 class="text-2xl font-bold mb-4 text-green-800">Your Universal Lunch Token</h2>
             <p class="mb-4 text-green-700">Show this QR code at the food counter to redeem your lunch. This token is valid only once.</p>
             <div class="flex justify-center md:justify-start">
-                 <img src="<?php echo $lunch_qr_file; ?>?t=<?php echo time(); ?>" alt="Lunch Token QR Code" class="border-4 border-white rounded-lg shadow-lg">
+                 <img src="<?php echo $lunch_qr_src; ?>" alt="Lunch Token QR Code" class="border-4 border-white rounded-lg shadow-lg">
             </div>
         </div>
         <?php endif; ?>
@@ -216,13 +238,13 @@ if ($has_registrations) {
                     <?php foreach($registrations as $reg): 
                         $qr_filename = 'event_' . preg_replace('/[^a-zA-Z0-9_-]/', '_', $reg['qr_code_data']) . '.png';
                         $qr_code_file_path = $qr_temp_dir . $qr_filename;
-                        QRcode::png($reg['qr_code_data'], $qr_code_file_path, QR_ECLEVEL_L, 4);
+                        $event_qr_src = get_qr_code_url($reg['qr_code_data'], $qr_code_file_path);
                     ?>
                     <div class="border border-slate-100 p-4 rounded-lg flex flex-col items-center text-center shadow-sm">
                         <h3 class="font-bold text-lg text-slate-900"><?php echo htmlspecialchars($reg['event_name']); ?></h3>
                         <p class="text-sm text-slate-500 mt-1"><?php echo htmlspecialchars($reg['venue']); ?></p>
                         <p class="text-sm text-slate-500"><?php echo date("D, M j, Y - g:i A", strtotime($reg['event_date'])); ?></p>
-                        <img src="<?php echo $qr_code_file_path; ?>?t=<?php echo time(); ?>" alt="Event Entry QR Code" class="mt-4 border-2 border-slate-200 p-1 rounded-md">
+                        <img src="<?php echo $event_qr_src; ?>" alt="Event Entry QR Code" class="mt-4 border-2 border-slate-200 p-1 rounded-md">
                         <p class="text-xs text-center mt-2 font-semibold">Event Entry Pass</p>
                     </div>
                     <?php endforeach; ?>
