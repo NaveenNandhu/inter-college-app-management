@@ -29,7 +29,7 @@ This project solves these problems using a digital event management platform wit
 
 # Key Features
 
-## 👨‍💼 Admin Module
+## Admin Module
 - Create and manage inter-college meets
 - Add multiple events under a meet
 - Assign coordinators for events
