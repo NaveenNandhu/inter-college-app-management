@@ -12,7 +12,7 @@ This platform helps colleges manage:
 
 ---
 
-# 📌 Project Overview
+# Project Overview
 
 Managing inter-college events manually creates many challenges such as:
 
@@ -27,7 +27,7 @@ This project solves these problems using a digital event management platform wit
 
 ---
 
-# ✨ Key Features
+# Key Features
 
 ## 👨‍💼 Admin Module
 - Create and manage inter-college meets
@@ -37,35 +37,35 @@ This project solves these problems using a digital event management platform wit
 - Manage event schedules and venues
 - Send notifications and greetings
 
-## 🎓 Student Module
+## Student Module
 - Student registration & login
 - Browse available events
 - Register for events online
 - View registered events
 - Download QR codes for participation
 
-## 📱 QR-Based Event Entry
+## QR-Based Event Entry
 - Unique QR code generated for every registration
 - Coordinators can scan QR codes
 - Attendance automatically recorded
 - Reduces manual verification
 
-## 🍱 Lunch Token System
+## Lunch Token System
 - Students registered for events receive lunch QR
 - Prevents duplicate food collection
 - Simplifies food distribution
 
-## 🏆 Result Management
+## Result Management
 - Event coordinators can update results
 - Students receive result notifications
 
-## 📜 Digital Certificate Generation
+## Digital Certificate Generation
 - Automatic participation certificate generation
 - Certificates delivered digitally
 
 ---
 
-# 🛠 Technologies Used
+# Technologies Used
 
 ## Frontend
 - HTML5
@@ -123,7 +123,7 @@ On event day:
 
 ---
 
-# 🔐 Authentication Features
+# Authentication Features
 
 - Secure student login system
 - Session-based authentication
@@ -131,7 +131,7 @@ On event day:
 
 ---
 
-# 🚀 Future Improvements
+# Future Improvements
 
 - UPI/GPay payment integration
 - AI-based event analytics
@@ -143,7 +143,7 @@ On event day:
 
 ---
 
-# 🌍 Real-World Impact
+# Real-World Impact
 
 This project aims to modernize how colleges conduct symposiums and technical events by:
 
@@ -155,7 +155,7 @@ This project aims to modernize how colleges conduct symposiums and technical eve
 
 ---
 
-# 📚 Learning Outcomes
+# Learning Outcomes
 
 Through this project, I learned:
 
@@ -169,7 +169,7 @@ Through this project, I learned:
 
 ---
 
-# 👨‍💻 Developed By
+# Developed By
 
 **Nandhakumar**  
 IT Student | Web Developer
@@ -178,7 +178,7 @@ Passionate about building real-world applications using modern web technologies.
 
 ---
 
-# 📬 Contact
+# Contact
 
 GitHub:  
 [NaveenNandhu](https://github.com/NaveenNandhu)
