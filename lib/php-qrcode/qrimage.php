@@ -27,9 +27,15 @@
     class QRimage {
 
         //----------------------------------------------------------------------
-        public static function png($frame, $filename = false, $pixelPerPoint = 4, $outerFrame = 4,$saveandprint=FALSE, $back_color, $fore_color)
+        public static function png($frame, $filename = false, $pixelPerPoint = 4, $outerFrame = 4,$saveandprint=FALSE, $back_color = 0xFFFFFF, $fore_color = 0x000000)
         {
+            if (!function_exists('imagecreate') && !function_exists('ImageCreate')) {
+                return false;
+            }
             $image = self::image($frame, $pixelPerPoint, $outerFrame, $back_color, $fore_color);
+            if (!$image) {
+                return false;
+            }
 
             if ($filename === false) {
                 Header("Content-type: image/png");
@@ -50,7 +56,13 @@
         //----------------------------------------------------------------------
         public static function jpg($frame, $filename = false, $pixelPerPoint = 8, $outerFrame = 4, $q = 85)
         {
+            if (!function_exists('imagecreate') && !function_exists('ImageCreate')) {
+                return false;
+            }
             $image = self::image($frame, $pixelPerPoint, $outerFrame);
+            if (!$image) {
+                return false;
+            }
 
             if ($filename === false) {
                 Header("Content-type: image/jpeg");
@@ -65,13 +77,16 @@
         //----------------------------------------------------------------------
         private static function image($frame, $pixelPerPoint = 4, $outerFrame = 4, $back_color = 0xFFFFFF, $fore_color = 0x000000)
         {
+            if (!function_exists('imagecreate') && !function_exists('ImageCreate')) {
+                return false;
+            }
             $h = count($frame);
             $w = strlen($frame[0]);
 
             $imgW = $w + 2*$outerFrame;
             $imgH = $h + 2*$outerFrame;
 
-            $base_image =ImageCreate($imgW, $imgH);
+            $base_image = ImageCreate($imgW, $imgH);
 
             // convert a hexadecimal color code into decimal format (red = 255 0 0, green = 0 255 0, blue = 0 0 255)
             $r1 = round((($fore_color & 0xFF0000) >> 16), 5);
